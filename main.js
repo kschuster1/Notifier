@@ -97,10 +97,16 @@ let settingsWindow;
               {
                   label:'Settings',
                   click(){
-                      createSettingsWindow();
-                  }
+                      //createSettingsWindow();
+                      mainWindow.loadURL(url.format({
+                        pathname: path.join(__dirname,'settingsWindow.html'),
+                        protocol: 'file:',
+                        slashes : true
+                    }));
+                    }
               },
               {
+                  
                   label:'Close Window',
                   click(){
                       app.hide;

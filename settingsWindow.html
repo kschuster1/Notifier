@@ -2,52 +2,65 @@
 <html lang="en">
 <head>
     <title>Settings</title>
-    <link rel="stylesheet" href="photon.min.css">
+    <!-- <link rel="stylesheet" href="./assets/css/photon.min.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
-    <form class="content__form contact-form">
-        <div>
+    <!-- <div class="window">
+        <div class="window-content">
+    <form >
+        <div class="form-group">
             <label>Enter RC#:</label>
-            <input required="required" name="RC"type="text" id="RC" autofocus>
+            <input class="form-control" required="required" name="RC"type="text" id="RC" autofocus>
+        </div>    
+        <div class="form-group">
             <label>Refresh Every:</label>
-            
-            <select  required="required" id="refreshTime" name="refreshTime">
+        </div>
+            <select class="form-contol"  required="required" id="refreshTime" name="refreshTime">
                 <option value="15">15 min.</option>
                 <option value="30" selected>30 min.</option>
                 <option value="60">60 min.</option>
-            </select>
-
-            <br>
-            <button class="waves-effect waves-light btn" type="submit">Update</button>
-        </div>
+            </select> -->
+        
+     
+        <!-- <div class="form-actions">
+            <button class="btn btn-primary" type="submit">Update</button>
+        </div> -->
+<!--     </div>
     </form>
+</div> -->
 
-    <script>
-        const electron = require('electron');
-        const {ipcRenderer} = electron;
+<form class="form-horizontal">
+        
+          <label for="RC" class="col-sm-2 control-label">Enter RC#</label>
+            <!-- <div class="form-group"> -->
+                <div class="col-sm-10">
+                    <input type="Text" class="form-control" id="RC" placeholder="RC#####">
+                </div>
+            <!-- </div> -->
 
- 
-        document.querySelector('form').addEventListener('submit', submitForm );
+          <label for="refreshTime" class="col-sm-2 control-label">Refresh Frequency</label>
+          <div class="col-sm-10">
+                <select class="form-contol input-sm"  required="required" id="refreshTime" name="refreshTime">
+                        <option value="15">15 min.</option>
+                        <option value="30" >30 min.</option>
+                        <option value="60">60 min.</option>
+                    </select>
 
-        function submitForm(e){
-            e.preventDefault();
-            const data={};
-            const dataContainer = document.getElementsByClassName('results_display')[0];
-            dataContainer.textContent = JSON.stringify(data, null, " ");
+        </div>
+        <!-- <div class="form-group"> -->
+            <br>
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Update</button>
+          </div>
+        <!-- </div> -->
+      </form>
 
-            // const RC = document.querySelector('#RC').value;
-            // const refreshTime = document.querySelector('#refreshTime').value
-  
-            // ipcRenderer.send('MyRefreshTime', refreshTime);
-            // ipcRenderer.send('MyRC', RC);
-           
-           //******************************************************************************
-           // Go through this
-           // https://code.lengstorf.com/get-form-values-as-json/
-           //****************************************************************************
-}
 
-    </script>
 
+
+
+    <script src="./settingsWindow.js"></script>
+        
 </body>
 </html>
