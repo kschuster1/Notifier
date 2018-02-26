@@ -1,0 +1,32 @@
+  Dim connetionStringRyan As String
+        Dim connetionString As String
+        Dim connection As SqlConnection
+        Dim adapter As SqlDataAdapter
+        Dim command As New SqlCommand
+        Dim ds As New DataSet
+        Dim dt As New DataTable
+
+        'connetionString = "Data Source=.\;Database=sri;Integrated Security=true;"
+        'for TR
+        connetionStringTR = "Data Source=10.198.150.8;Initial Catalog=PTSTools;User Id=PTSTools_Notifier;Password=13ptsRYan!;"  'sql2.ryanco.com
+
+        'for Ryan 
+        connetionStringRyan = "Data Source=dalptssqldbv.ryanco.com;Initial Catalog=PTSTools;User Id=PTSTools_Notifier;Password=13ptsRYan!;"
+
+        If ServerAccess("dalptssqldbv.ryanco.com") = True Then
+            connetionString = connetionStringRyan
+        ElseIf ServerAccess("10.198.150.8") = True Then
+            connetionString = connetionStringTR
+        Else
+            lbltotaltask.Text = "No SQL Server connection found."
+            Exit Sub
+        End If
+
+        connection = New SqlConnection(connetionString)
+
+        connection.Open()
+
+
+        command.CommandText = "EXEC dbo.spGetWorkSummary @WindowsLogin='" & Trim(frmSettings.txtlogin.Text) & "'"                '    U0104922
+        adapter = New SqlDataAdapter(command)
+        adapter.Fill(ds)
