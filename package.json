@@ -10,12 +10,15 @@
   "author": "Keith Schuster",
   "license": "ISC",
   "dependencies": {
-    "electron": "^1.7.12",
     "electron-positioner": "^3.0.0",
     "electron-window-manager": "^1.0.6",
     "mssql": "^4.1.0",
     "mssql-tedious-1-11-4": "^2.2.1",
     "mssql2": "^3.3.1",
+    "node": "^9.5.0",
     "nodemon": "^1.15.0"
+  },
+  "devDependencies": {
+    "electron": "1.8.2"
   }
 }
