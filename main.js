@@ -106,7 +106,6 @@ let settingsWindow;
                     }
               },
               {
-                  
                   label:'Close Window',
                   click(){
                       app.hide;
