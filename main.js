@@ -3,14 +3,25 @@
 const electron = require('electron');
 const url  = require('url');
 const path = require('path');
+//const handleSettings = require('./settings.js');
+const fs = require('fs');
+// Store user info
+var RCNo;
+var refreshTime = 30;
+var settingsExist = false;
 
 // SET ENV
 process.env.NODE_ENV = 'development';
 
 const {app,BrowserWindow,Menu, ipcMain} = electron;
 
+//
+
 let mainWindow;
 let settingsWindow;
+
+intialize();
+console.log('the RC: ' + RCNo);
 
 
 
@@ -34,8 +45,9 @@ let settingsWindow;
         alwaysOnTop:true,
         movable: false
     });
-    //Load HTML file
 
+
+    //Load HTML file
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname,'mainWindow.html'),
         protocol: 'file:',
@@ -53,7 +65,7 @@ let settingsWindow;
 });
 
 // Create Settings Menu
-    function createSettingsWindow(){
+/*     function createSettingsWindow(){
         //Create main window
     settingsWindow = new BrowserWindow({
       //  width:200,
@@ -61,9 +73,10 @@ let settingsWindow;
       width:600,
       height:500,
         title:'Settings'
-    });
-    //Load HTML file
+    }); 
 
+
+    //Load HTML file
     settingsWindow.loadURL(url.format({
         pathname: path.join(__dirname,'settingsWindow.html'),
         protocol: 'file:',
@@ -74,7 +87,7 @@ let settingsWindow;
     settingsWindow.on('close', function(){
         MSWebViewSettings = null;  
     })
-    }
+    }*/
 
 // Catch RC:Add and refreshTime:add from Settings Window
  ipcMain.on('MyRC', function(e,RC){
@@ -142,3 +155,33 @@ let settingsWindow;
 
         })
     }
+
+    function intialize(){
+        fs.readFile('settings.json', (err, fd) => {
+            if (err) {
+              if (err.code === 'ENOENT') {
+        
+                // file does not exist trigger user interation to update
+                //settingsExist = false;
+            console.log(settingsExist);
+                console.error('myfile does not exist');
+                return;
+              }
+          
+              throw err;
+            }
+                console.log('found');
+                settingsExist = true;
+                // Read the json file into variables
+                let rawData = JSON.parse(fd);
+                console.log(rawData);
+                RCNo = rawData.RC;   
+                //console.log(RCNo);
+                refreshTime = rawData.refreshTime; 
+          });
+        
+    
+    
+    }
+
+    console.log(RCNo);

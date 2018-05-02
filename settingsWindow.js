@@ -10,6 +10,10 @@ const electron = require('electron');
             const dataContainer = document.getElementsByClassName('results_display')[0];
             dataContainer.textContent = JSON.stringify(data, null, " ");
 
+            
+            
+            
+            
             // const RC = document.querySelector('#RC').value;
             // const refreshTime = document.querySelector('#refreshTime').value
   
